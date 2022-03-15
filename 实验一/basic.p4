@@ -92,7 +92,7 @@ control MyIngress(inout headers hdr,
     }
 
     action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {
-        standard_metadata.EgressSpec = port;         //将输出的端口从参数中取出，参数是由控制面配置
+        standard_metadata.egress_spec = port;         //将输出的端口从参数中取出，参数是由控制面配置
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;  //原始数据包的源地址改为目的地址
         hdr.ethernet.dstAddr = dstAddr;               //目的地址改为控制面传入的新地址
         hdr.ipv4.ttl = hdr.ipv4.ttl - 1;              //ttl递减 
